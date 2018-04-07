@@ -101,12 +101,12 @@ void onreq() {
 }
 
 void onRes(int nBytes) {
-/*if(nBytes < 9)
-  return;*/
+if(nBytes < 8)
+  return;
 #ifdef DEBUG
 	Serial.println("ONRES");
 #endif
-  delay(50);
+  delay(100);
 	from = Wire.read();
 	uint8_t cmd = Wire.read();
 	switch (cmd) {
@@ -270,7 +270,9 @@ bool data_available() {
 }
 
 void readData(uint8_t* data) {
-	data = INPUT_BUFFER;
+  for(int i = 0; i < 6; i++){
+    data[i] = INPUT_BUFFER[i];
+    }
 	new_data = false;
 }
 

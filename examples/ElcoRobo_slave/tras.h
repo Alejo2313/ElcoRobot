@@ -3,7 +3,10 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <VirtualWire.h>
+
+#ifdef RF
+  #include <VirtualWire.h>
+#endif
 
 #define DEBUG
 //#define NODE

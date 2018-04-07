@@ -101,8 +101,8 @@ void onreq() {
 }
 
 void onRes(int nBytes) {
-/*if(nBytes < 9)
-  return;*/
+if(nBytes < 9)
+  return;
 #ifdef DEBUG
 	Serial.println("ONRES");
 #endif
@@ -285,7 +285,6 @@ void putData(uint8_t to, uint8_t cmd, uint8_t* data) {
 
 
 /*rf functions */
-#ifdef RF
 
 void tras_rf_begin(uint8_t dataP, uint8_t mode) {
 	vw_setup(2000);
@@ -321,5 +320,5 @@ void rf_readData(uint8_t* data) {
 	uint8_t len = 9;
 	vw_get_message(data, &len);
 }
-#endif
+
 

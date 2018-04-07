@@ -105,7 +105,7 @@ void onRes(){
       for(c = 0; c < 6 ; c++){
         INPUT_BUFFER[c] = Wire.read();
         #ifdef DEBUG
-          Serial.print((char)INPUT_BUFFER[c] );
+          Serial.print(INPUT_BUFFER[c] );
         #endif
       }
       #ifdef DEBUG
@@ -192,6 +192,7 @@ void putData(uint8_t* data){
     OUTPUT_BUFFER[c] = data[c];
 }
 
+#ifdef RF
 
 /*rf functions */
 
@@ -228,5 +229,5 @@ void rf_readData(uint8_t* data){
   uint8_t len = 9;
   vw_get_message(data, &len);  
 }
-
+#endif
 

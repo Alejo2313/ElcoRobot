@@ -14,24 +14,28 @@
 //CMD
 #define DATA_IN  	 		0x88
 #define AUTH   				0x55
+#define ACK           0x25
+#define REQ_DATA      0x10
 
 
 //otros
-#define TIME_OUT 			1000
+#define TIME_OUT 			    1000
 #define MASTER_ADDRESS		0x00
-#define RF_ADDRESS			0xFF
-#define RF_EMITER			1
-#define RF_RECEPTOR			0
+#define RF_ADDRESS			  0xFF
+#define RF_EMITER			    1
+#define RF_RECEPTOR			  0
 
-/*types*/
-typedef enum L_STATUS{
+#define MAX_DEVICES       127
+
+
+/*types*/enum L_STATUS{
    STATUS_OK,
    STATUS_ERROR,
    STATUS_TIMEOUT
 };
 
 /*variables */
-extern uint8_t OUTPUT_BUFFER[6];
+extern uint8_t OUTPUT_BUFFER[9];
 extern uint8_t INPUT_BUFFER[6];
 extern uint8_t controlPin;
 extern bool new_data;
@@ -39,8 +43,10 @@ extern uint8_t address;
 extern uint8_t dataPin;
 extern L_STATUS status;
 
-/*Const*/
-const uint8_t dummy_data[] ={0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+extern uint8_t from;
+
+extern uint8_t knowDevices[MAX_DEVICES];
+extern uint8_t nKnowDevices;
 
 
 /*public functions*/
@@ -56,7 +62,7 @@ void tras_begin(uint8_t addr, uint8_t controlPin);
 
 	@param -> addr, Direccion asignada al dispositivo
 */
-void tras_begin(uint8_t controlPin);
+void tras_begin(uint8_t control);
 
 /*
 	Pone  los datos en el buffer de salida. Cuando el master los 
@@ -64,7 +70,7 @@ void tras_begin(uint8_t controlPin);
 
 	@param -> data, array que contiene los datos
 */
-void putData(uint8_t* data);
+void putData(uint8_t to, uint8_t cmd, uint8_t* data);
 
 /*
 	Lee los datos disponibles en el buffer de entrada
@@ -94,7 +100,7 @@ L_STATUS auth();
 	@return -> L_STATUS,  Resultado del envio
 */
 
-L_STATUS sendData(uint8_t* data, uint8_t cmd );
+L_STATUS sendData(uint8_t to,  uint8_t cmd, uint8_t* data );
 
 /*		ONLY IN MASTER MODE
 	Envia los datos al SLAVE
@@ -151,6 +157,16 @@ bool rf_data_available();
 */
 void rf_readData(uint8_t* data);
 
+/*
+ * devuelve el numero de dispositivos conectados
+ */
+uint8_t nDevices(void);
 
+/*Devuelve la lista de dispositivos conectados;
+ * 
+ */
+uint8_t* devices(void);
+
+void yesSir();
 
 #endif

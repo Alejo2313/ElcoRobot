@@ -1,10 +1,6 @@
 #ifndef tras_Code_h
 #define  tras_Code_h
 
-
-#define RF
-
-
 #include <Arduino.h>
 #include <Wire.h>
 
