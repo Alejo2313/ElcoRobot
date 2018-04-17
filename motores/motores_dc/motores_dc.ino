@@ -1,18 +1,10 @@
-/* 
- Ejemplo de control de motor DC usando modulo L298
- http://electronilab.co/tienda/driver-dual-para-motores-full-bridge-l298n/
- 
- Creado 16/05/14
- por Andres Cruz
- ELECTRONILAB.CO
- */
-
  /* 
   *  Javier Otero Martinez
   *  Miguel Garcia Maya
   *  ELCO - 2018
   *  
   */
+#include "tras.h"
 
 #define IZQ_GIR1 7   //Verde
 #define IZQ_GIR0 6   //Amarillo
@@ -23,6 +15,7 @@
 #define PWM_DER  3   //Blanco 
 
 #define VELOCIDAD_FULL 230
+#define VELOCIDAD_GIRO 100
 
 void setup() {
  pinMode (PWM_IZQ, OUTPUT); 
@@ -32,17 +25,32 @@ void setup() {
  pinMode (DER_GIR0, OUTPUT);
  pinMode (DER_GIR1, OUTPUT);
  pinMode (DATA_PIN, INPUT);
+
+ tras_begin(0x03, DATA_PIN);
+ 
 }
 
 void loop() {
   avanza();
-  delay(2000);
+  delay(1000);
+  gira_derecha();
+  delay(1000);
+  gira_izquierda();
+  delay(1000);
   para();
   delay(2000);
   atras();
   delay(2000);
   para();
   while (1) {delay(1000);}
+
+ /*
+    if(data_available()){  //Devuelve si hay datos disponibles
+    readData(data);      //Devuelve los datos en el buffer. El parametro es el  array donde se almacenan los datos.
+    Serial.println((int)INPUT_BUFFER[0]);
+    servoMotor.write(INPUT_BUFFER[0]);
+  */
+  
 }
 
 void avanza(){
@@ -65,6 +73,16 @@ void atras() {
  digitalWrite (DER_GIR0, LOW);
  digitalWrite (DER_GIR1, HIGH);
  analogWrite (PWM_IZQ, VELOCIDAD_FULL);
+ analogWrite (PWM_DER, VELOCIDAD_FULL);
+}
+
+void gira_derecha() {
+ analogWrite (PWM_IZQ, VELOCIDAD_FULL);
+ analogWrite (PWM_DER, VELOCIDAD_GIRO);
+}
+
+void gira_izquierda() {
+ analogWrite (PWM_IZQ, VELOCIDAD_GIRO);
  analogWrite (PWM_DER, VELOCIDAD_FULL);
 }
 
