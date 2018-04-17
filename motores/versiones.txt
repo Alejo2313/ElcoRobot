@@ -1,0 +1,2 @@
+1.0 Prueba inicial del conexionado de los motores, la bateria y los drivers
+
