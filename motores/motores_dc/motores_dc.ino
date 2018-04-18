@@ -17,6 +17,14 @@
 #define VELOCIDAD_FULL 230
 #define VELOCIDAD_GIRO 100
 
+uint8_t data[6];
+
+void para();
+void avanza();
+void atras();
+void gira_derecha();
+void gira_izquierda();
+
 void setup() {
  pinMode (PWM_IZQ, OUTPUT); 
  pinMode (PWM_DER, OUTPUT);
@@ -26,11 +34,13 @@ void setup() {
  pinMode (DER_GIR1, OUTPUT);
  pinMode (DATA_PIN, INPUT);
 
- tras_begin(0x03, DATA_PIN);
+ tras_begin(0x04, DATA_PIN);
  
 }
 
+
 void loop() {
+  /*
   avanza();
   delay(1000);
   gira_derecha();
@@ -43,14 +53,26 @@ void loop() {
   delay(2000);
   para();
   while (1) {delay(1000);}
-
- /*
-    if(data_available()){  //Devuelve si hay datos disponibles
-    readData(data);      //Devuelve los datos en el buffer. El parametro es el  array donde se almacenan los datos.
-    Serial.println((int)INPUT_BUFFER[0]);
-    servoMotor.write(INPUT_BUFFER[0]);
   */
   
+  if(data_available()){  //Devuelve si hay datos disponibles
+    readData(data);      //Devuelve los datos en el buffer. El parametro es el  array donde se almacenan los datos.
+    if (INPUT_BUFFER[0] == 1) {
+      para();
+      Serial.println("Para");
+    } else if (INPUT_BUFFER[0] == 2){
+      avanza();
+      Serial.println("Avanza");
+    } else if (INPUT_BUFFER[0] == 3){
+      atras();
+    }
+    if (data[1] == 2){
+      gira_derecha();
+    } else if (data[1] == 3) {
+      gira_izquierda();
+    }
+    //Serial.println((int)INPUT_BUFFER[0]);}
+  }
 }
 
 void avanza(){

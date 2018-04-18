@@ -1,3 +1,4 @@
 1.0 Prueba inicial del conexionado de los motores, la bateria y los drivers
 2.0 Movimiento basico hacia delante y hacia atras
-
+3.0 Giros y comienzo del protocolo 17/4
+4.0 Ultimos cambios de por la tarde tal y como los utilizamos para probar las comunicaciones
