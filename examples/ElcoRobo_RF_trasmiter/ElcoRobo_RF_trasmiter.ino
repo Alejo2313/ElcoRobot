@@ -50,7 +50,15 @@ void loop()
           case 'x':
             data[0] = 45;
             rf_sendData(0x03,DATA_IN, data);
-            break;    
+            break;  
+          case 'u':
+            data[0] = 2;
+            rf_sendData(0x04,DATA_IN, data);
+            break;
+          case 't':
+            data[0] = 1;
+            rf_sendData(0x04,DATA_IN, data);
+            break;
           }
 
       }
