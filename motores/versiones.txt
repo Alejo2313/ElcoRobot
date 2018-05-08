@@ -3,3 +3,5 @@
 3.0 Giros y comienzo del protocolo 17/4
 4.0 Ultimos cambios de por la tarde tal y como los utilizamos para probar las comunicaciones
 5.0 Motores funcionando
+6.0 Pines cambiados y acelerometro funcionando
+7.0 Cambios en la velocidad de giro
