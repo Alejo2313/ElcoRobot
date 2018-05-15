@@ -50,14 +50,35 @@ void loop()
           case 'x':
             data[0] = 45;
             rf_sendData(0x03,DATA_IN, data);
-            break;  
-          case 'u':
-            data[0] = 2;
-            rf_sendData(0x04,DATA_IN, data);
             break;
-          case 't':
-            data[0] = 1;
+              
+          case 'i':
+            data[0] = 2;
+            data[1] = 0;
             rf_sendData(0x04,DATA_IN, data);
+            Serial.println("Avanza\n");
+            break;
+          case 'k':
+            data[0] = 1;
+            data[1] = 0;
+            rf_sendData(0x04,DATA_IN, data);
+            Serial.println("Para\n");
+            break;
+          case 'o':
+            data[0] = 3;
+            data[1] = 0;
+            rf_sendData(0x04,DATA_IN, data);
+            Serial.println("Atras\n");
+            break;
+          case 'l':
+            data[1] = 3;
+            rf_sendData(0x04,DATA_IN, data);
+            Serial.println("Gira derecha\n");
+            break;
+          case 'j':
+            data[1] = 2;
+            rf_sendData(0x04,DATA_IN, data);
+            Serial.println("Gira Izquierda\n");
             break;
           }
 

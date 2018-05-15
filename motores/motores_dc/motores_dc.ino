@@ -10,7 +10,7 @@
 #define IZQ_GIR0 12   //Amarillo
 #define DER_GIR1 5   //Naranja
 #define DER_GIR0 4   //Rojo
-#define DATA_PIN 7
+
 #define PWM_IZQ  9   //Gris
 #define PWM_DER  3   //Blanco 
 
@@ -62,12 +62,14 @@ void loop() {
     if (INPUT_BUFFER[0] == 1) {
       para();
       Serial.println("Para");
+      
     } else if (INPUT_BUFFER[0] == 2){
       avanza();
       Serial.println("Avanza");
+      
     } else if (INPUT_BUFFER[0] == 3){
       atras();
-      Serial.println("Avanza");
+      Serial.println("Atras");
     }
     if (INPUT_BUFFER[1] == 3){
       gira_derecha();
@@ -89,8 +91,8 @@ void avanza(){
 }
 
 void para(){
- analogWrite (PWM_IZQ, 0);
- analogWrite (PWM_DER, 0); 
+ analogWrite (PWM_IZQ, LOW);
+ analogWrite (PWM_DER, LOW); 
 }
 
 void atras() {
@@ -103,13 +105,21 @@ void atras() {
 }
 
 void gira_derecha() {
- analogWrite (PWM_IZQ, VELOCIDAD_GIRO_RAPIDO);
- analogWrite (PWM_DER, VELOCIDAD_GIRO_LENTO);
+   digitalWrite (IZQ_GIR0, HIGH);
+ digitalWrite (IZQ_GIR1, LOW);
+ digitalWrite (DER_GIR0, HIGH);
+ digitalWrite (DER_GIR1, LOW);
+ analogWrite (PWM_DER, VELOCIDAD_GIRO_RAPIDO);
+ analogWrite (PWM_IZQ, VELOCIDAD_GIRO_LENTO);
 }
 
 void gira_izquierda() {
- analogWrite (PWM_IZQ, VELOCIDAD_GIRO_LENTO);
- analogWrite (PWM_DER, VELOCIDAD_GIRO_RAPIDO);
+   digitalWrite (IZQ_GIR0, HIGH);
+ digitalWrite (IZQ_GIR1, LOW);
+ digitalWrite (DER_GIR0, HIGH);
+ digitalWrite (DER_GIR1, LOW);
+ analogWrite (PWM_DER, VELOCIDAD_GIRO_LENTO);
+ analogWrite (PWM_IZQ, VELOCIDAD_GIRO_RAPIDO);
 }
 
 
