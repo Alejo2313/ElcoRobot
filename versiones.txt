@@ -6,3 +6,4 @@
 6.0 Pines cambiados y acelerometro funcionando
 7.0 Cambios en la velocidad de giro
 8.0 Grabacion del video
+9.0 Entregado
